@@ -140,7 +140,7 @@ module.exports =
 
     context = CLIENT.context or {}
     { query, init, variables } = setup(context)
-
+    console.log 'query:', query
     return unless query? and init?
     variables ?= {}
     metaphysics query: query, variables: extend { id: CLIENT.id }, variables
