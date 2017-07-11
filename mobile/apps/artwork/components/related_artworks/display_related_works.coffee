@@ -1,5 +1,6 @@
 _ = require 'underscore'
 { ARTWORK } = require('sharify').data
+{ resize } = require '../../../../components/resizer/index.coffee'
 template = -> require('./template.jade') arguments...
 artworkColumnsTemplate = -> require('../../../../components/artwork_columns/template.jade') arguments...
 
@@ -11,6 +12,7 @@ module.exports =
         artworks = artworkColumnsTemplate
           artworkColumns: relatedWorks.collection.groupByColumnsInOrder()
           isAuction: context.__typename is 'ArtworkContextAuction' and context.is_open
+          resize: resize
 
         type = relatedWorks.typeName
 

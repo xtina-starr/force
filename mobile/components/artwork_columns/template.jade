@@ -1,4 +1,4 @@
-mixin artworkItemTemplate(artwork, size)
+mixin artworkItemTemplate(artwork, size, resize)
   if isAuction || artwork.get('sale')
     include auction_artwork
   else
@@ -19,4 +19,4 @@ div( class=className )
   for column in artworkColumns
     .artwork-columns-column
       for artwork in column
-        +artworkItemTemplate(artwork, size)
+        +artworkItemTemplate(artwork, size, resize)

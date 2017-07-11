@@ -4,7 +4,7 @@
 - hasAuctionPartner = (artwork.get('partner') && (artwork.get('partner').type === 'Auction' || artwork.get('partner').type === 'Auction House'))
 .artwork-columns-artwork
   a( href='/artwork/' + artwork.get('id') )
-    img( src=imageUrl data-id=artwork.get('_id') )
+    img( src= resize(imageUrl, { width: 200 }) data-id=artwork.get('_id') )
   .artwork-columns-artwork-details
     if artwork.get('artist')
       p= artwork.get('artist').name
