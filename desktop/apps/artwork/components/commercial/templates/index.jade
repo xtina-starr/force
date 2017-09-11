@@ -1,0 +1,12 @@
+.artwork-commercial( class='js-artwork-commercial' )
+  form.artwork-commercial__form
+    if artwork.is_purchasable
+      include ./purchase_flow_index
+    else
+      include ./standard_index
+  if artwork.is_for_sale
+    .artwork-commercial__questions
+      | Questions about buying art on Artsy?
+      | Read our&nbsp;
+      a.collector-faq( href='/#' ) Collector FAQ
+
