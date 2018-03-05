@@ -1,15 +1,6 @@
 - fbPathQuery = acquisitionInitiative ? "?acquisition_initiative=#{acquisitionInitiative}" : ''
 - DISABLE_GDPR = false
-//- - headerCopy = typeof copy === 'string' ? copy : (copy.get('signup'))
 
-
-//- .marketing-signup-modal-right__logo.icon-logotype
-//- if headerCopy
-//-   h2.marketing-signup-modal-h2= headerCopy
-//- else
-//-   h2.marketing-signup-modal-h2 The world’s greatest art, online. Sign up
-//-     br
-//-     | to discover and collect your favorites.
 .gdpr-signup
   form.gdpr-signup__form
     input.bordered-input(
@@ -25,28 +16,32 @@
       placeholder='Create password'
       type='password'
     )
-    button.avant-garde-button-black Sign Up
     if !DISABLE_GDPR
       .gdpr-signup__form__checkbox
-        .gdpr-signup__form__checkbox-left agree to our&nbsp;
-              a( href='/terms' ) Terms of Use
-              | &nbsp;and&nbsp;
-              a(href='/privacy') Privacy Policy
-        .gdpr-signup__form__checkbox-right
+        .artsy-checkbox
           .artsy-checkbox--checkbox
             input(
+              required=true
               name='accept_tos'
+              id='tos-checkbox'
               type='checkbox'
             )
-            label(for='accept_tos')
-      .gdpr-signup__form__checkbox
-        .gdpr-signup__form__checkbox-left Subscribe to artsy magazine
-          .artsy-checkbox--checkbox
-            input(
-              name='receive_newsletter'
-              type='checkbox'
-            )
-            label(for='receive_newsletter')
+            label(for='tos-checkbox')
+          span Agree to our&nbsp;
+                a( href='/terms' ) Terms of Use
+                | &nbsp;and&nbsp;
+                a(href='/privacy') Privacy Policy.
+      .gdpr-signup__form__checkbox.artsy-checkbox
+        .artsy-checkbox--checkbox
+          input(
+            required=true
+            name='receive_newsletter'
+            type='checkbox'
+            id='news-checkbox'
+          )
+          label(for='news-checkbox')
+        span Receive our weekly newsletter.
+    button.avant-garde-button-black Sign Up
     .gdpr-signup__error
   .gdpr-signup__divider Or
   a.avant-garde-button-black.gdpr-signup__modal-fb.gdpr-signup__fb(
