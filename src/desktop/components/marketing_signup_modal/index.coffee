@@ -46,7 +46,7 @@ class MarketingSignupModalInner extends Backbone.View
     queryData =
       'signup-intent': @signupIntent
       'redirect-to': '/personalize'
-      'acquisition_initiative': sd.MARKETING_SIGNUP_MODAL_SLUG || @acquisitionInitiative
+      'acquisition_initiative': sd.MARKETING_SIGNUP_MODAL_SLUG || @acquisitionInitiative # TODO Fix 
     queryString = $.param(queryData)
     fbUrl = sd.AP.facebookPath + '?' + queryString
     console.log('fbUrl', fbUrl)
