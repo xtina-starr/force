@@ -57,6 +57,7 @@
         .artsy-checkbox--checkbox
           input(
             required,
+            oninvalid="this.setCustomValidity('Please agree to our terms to continue.')"
             name='accepted_terms_of_service',
             id='accepted_terms_of_service',
             type='checkbox',
@@ -67,7 +68,7 @@
               a( href='/terms' ) Terms of Use
               | &nbsp;and&nbsp;
               a(href='/privacy') Privacy Policy&nbsp;
-              |(and subscribe).
+              |, and to receive emails from Artsy.
     button.avant-garde-button-black Sign Up
     .gdpr-signup__error
   .gdpr-signup__divider or
