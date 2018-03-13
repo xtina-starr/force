@@ -122,13 +122,16 @@ module.exports = class AuthModalView extends ModalView
   
   checkAcceptedTerms: ->
     $input = $('.gdpr-signup__form__checkbox__accept-terms input')[0]
+    # $input = $('#foo')[0]
     $boxContainer = $('.gdpr-signup__form__checkbox__accept-terms')
     if $input.checkValidity()
       $boxContainer.attr('data-state', null)
+      $input.setCustomValidity? ''
       true
     else
       $boxContainer.attr('data-state', 'error')
-      @showError('Please accept the Terms of Service.')
+      $input.setCustomValidity? 'Please agree to our terms to continue'
+      # @showError('Please accept the Terms of Service.')
       false
 
   fbSignup: (e) ->
