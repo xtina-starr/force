@@ -125,6 +125,7 @@ module.exports = class AuthModalView extends ModalView
     input = $('input#accepted_terms_of_service').get(0)
     input.setCustomValidity? ''
     if input.checkValidity()
+      @showError('')
       $boxContainer = $('.gdpr-signup__form__checkbox__accept-terms')
       $boxContainer.attr('data-state', null)
       true
@@ -142,6 +143,7 @@ module.exports = class AuthModalView extends ModalView
 
 
   fbSignup: (e) ->
+    e.preventDefault()
     queryData =
       'signup-intent': @signupIntent
       'redirect-to': @currentRedirectTo()
