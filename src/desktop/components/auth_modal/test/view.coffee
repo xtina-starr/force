@@ -121,7 +121,6 @@ describe 'AuthModalView', ->
       ) + "</form>"
       @view.state.set mode: 'register'
       @view.submit $.Event('click')
-      console.log(Backbone.sync.args[1][1].toJSON())
       Backbone.sync.args[1][1].toJSON()._csrf.should.equal 'csrfoo'
 
   describe '#onSubmitSuccess', ->
