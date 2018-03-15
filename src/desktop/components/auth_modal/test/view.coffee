@@ -20,7 +20,9 @@ render = (templateName) ->
 describe 'AuthModalView', ->
   before (done) ->
     benv.setup =>
-      benv.expose $: benv.require('jquery'), jQuery: benv.require('jquery')
+      benv.expose
+        $: benv.require('jquery'),
+        jQuery: benv.require('jquery')
       Backbone.$ = $
       @AuthModalView = rewire '../view'
       @AuthModalView.__set__ 'Cookies',
@@ -34,7 +36,7 @@ describe 'AuthModalView', ->
     benv.teardown()
 
   beforeEach ->
-    @view = new @AuthModalView
+    @view = new @AuthModalView()
     sinon.stub(Backbone, 'sync').yieldsTo 'success', user: accessToken: 'secrets'
 
   afterEach ->
@@ -140,17 +142,23 @@ describe 'AuthModalView', ->
 
   describe 'GDPR compliance', ->
     beforeEach ->
-      @view.reRender()
+      @view.state = new Backbone.Model mode: 'register'
+      @view.user = new LoggedOutUser
+      @view.$el.html $ "<form>" + render('register')(
+        copy: new Backbone.Model
+        sd: CSRF_TOKEN: 'csrfoo', AP: loginPagePath: 'foo'
+      ) + "</form>"
+      # @view.renderInner()
 
-    it 'requires user accept terms for registration via email', ->
+
+
+    xit 'requires user accept terms for registration via email', ->
       @view.$('input[name="name"]').val('Foo Bar')
       @view.$('input[name="email"]').val('foo@bar.com')
       @view.$('input[name="password"]').val('password123!')
-      @view.$('form').submit()
-      console.log('**********', @view.$('*').text())
-      @view.$('.auth-errors').html().should.equal 'oops'
-      # _.last(Backbone.sync.args)[0].should.equal 'create'
-      # _.last(Backbone.sync.args)[1].url.should.containEql 'api/v1/me/artwork_inquiry_request'
-
-    # xit 'requires user accept terms for registration via social auth'
+      console.log(typeof @view.$('form').get(0).checkValidity)
+      @view.$('form').checkValidity()
+      console.log(@view.$('.tos-error').html())
+      @view.$('.tos-error').text().should.equal 'html5 checkValidity not firing in node'
+    xit 'requires user accept terms for registration via social auth'
 

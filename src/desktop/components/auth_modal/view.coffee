@@ -155,10 +155,9 @@ module.exports = class AuthModalView extends ModalView
     fbUrl = sd.AP.facebookPath + '?' + queryString
     return window.location.href = fbUrl if @gdprDisabled
 
-    if @checkAcceptedTerms(true)
+    if @checkAcceptedTerms()
       gdprString = $.param(@gdprData(@serializeForm()))
       gdprFbUrl = fbUrl + "&" + gdprString
-      console.log('fbUrl With Boxes', gdprFbUrl)
       window.location.href = gdprFbUrl
 
   # accomodate AB test for checkboxes
@@ -176,7 +175,6 @@ module.exports = class AuthModalView extends ModalView
     return if @formIsSubmitting()
 
     e.preventDefault()
-
 
     @$('button').attr 'data-state', 'loading'
 
